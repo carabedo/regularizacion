@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>Regularizacion-checkpoint slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Regularizacion-slides slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 <!-- General and theme style sheets -->
 <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.0.2/dist/reveal.css">
@@ -14424,8 +14424,8 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Supongamos un dataset, en el cual la variable target $y$ tiene una dependencia f(x) de variables $x$ y sea $\epsilon$ la parte aleatoria inherente que no puede ser descripta.
-<br></p>
+<p>Supongamos una variable $y$ que tiene una dependencia f(x) con las variables $x$ y sea $\epsilon$ la parte aleatoria inherente que no puede ser descripta (ruido).</p>
+<p><br></p>
 <center>$\huge y= f(x)  + \epsilon $</center><p><br></p>
 <p>Nuestro objetivo cuando realizamos un ajuste es encontrar una funcion $\hat{f}$ que permita realizar predicciones $\hat{y}$ que se asemejen a $y$
 <br></p>
@@ -14459,19 +14459,18 @@ Para la regresion lineal miramos el MSE:
 <p><br></p>
 <p><center>$\Large MSE =\sum_{i}^N (\bar{\beta} \cdot \bar{x}^{(i)}  -y^{(i)} )^2  $</center>
 <br></p>
-<p>El supraindice indica la i-esima de N observaciones y $\bar{\beta}$ es el vector de coeficientes $(\beta_0 , \beta_1 ,  \beta_2 , ... , \beta_n)$</p>
+<p>El supraindice indica la i-esima de N observaciones y $\bar{\beta}$ es el vector de coeficientes $(\beta_0 , \beta_1 ,  \beta_2 , ... , \beta_n)$ mientras $\bar{x}^{(i)}$ e $\bar{y}^{(i)}$ son nuestros datos de entrenamiento.</p>
 
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Cuando entrenamos un modelo de regresion lineal, buscamos reducir el MSE usando los datos de entrenamiento, por lo que $\bar{x}^{(i)}$ e $\bar{y}^{(i)}$ son nuestros datos de entrenamiento y la <strong>unica incognita es el vector de los coeficientes</strong> $ \bar{\beta}$ 
+<p>Cuando entrenamos un modelo de regresion lineal, buscamos reducir el MSE usando los datos de entrenamiento, $\bar{x}^{(i)}$ e $\bar{y}^{(i)}$ son nuestros datos de entrenamiento y la <strong>unica incognita es el vector de los coeficientes</strong> $ \bar{\beta}$ 
 <br></p>
-<p>Buscamos minimizar el MSE, es decir resolver:</p>
+<p>Buscamos minimizar el MSE, en el calculo diferencial buscar para que valores de sus argumentos una funcion es minima (o maxima) se lo conoce como "optimizacion". Sabemos que los extremos de una funcion se dan en los valores para los cuales la derivada primera es nula.</p>
 <p><br></p>
-<p><center>$\Large MSE (\bar{\beta}) \approx 0 $</center>
+<p><center>$\Large \frac{\partial MSE (\bar{\beta})  }{\partial \beta}  = 0 $</center>
 <br></p>
-<p>En el calculo diferencial buscar para que valores de sus argumentos una funcion es minima (o maxima) se lo conoce como "optimizacion". Cuando utilizamos un modelo de regresion lineal, el algoritmo en el fondo resuelve un problema de optmizacion.</p>
 
 </div>
 </div></section></section><section><section>
@@ -14489,7 +14488,15 @@ Para la regresion lineal miramos el MSE:
 </li>
 <li><p>Ajustar datos es minimizar una funcion de costo y asi encontrar los parametro que reduzcan el error en nuestra prediccion.</p>
 </li>
+<li><p>En teoria se podria derivar la funcion de costo y encontrar una relacion analitica entre los $\beta$ y los datos de entrenamieto.</p>
+</li>
 </ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="alg.png" alt=""></p>
 
 </div>
 </div></section></section><section><section>
@@ -14500,10 +14507,16 @@ Para la regresion lineal miramos el MSE:
 </li>
 <li><p>Este metodo busca iterativamente en el espacio de todos los posibles parametros $\beta_n$, la combinacion de $\beta_n^*$ que minimicen la funcion de costo. Esos seran los parametros que usaremos para nuestro modelo.</p>
 </li>
-<li><p>La manera en la que los encuentra es dar pequeños pasos (learning steps) en la direccion, en el espacio de parametros,  en la cual haya una mayor variacion de la funcion de costo.</p>
+<li><p>La manera en la que los encuentra es dar pequeños pasos (learning steps) en la direccion contraria, en el espacio de parametros, para la cual haya una mayor variacion de la funcion de costo.</p>
 </li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/carabedo/carabedo.github.io/main/imgs/1.jpg" align="center" width="60%"/></p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><a href="https://lukaszkujawa.github.io/gradient-descent.html">https://lukaszkujawa.github.io/gradient-descent.html</a></p>
 
 </div>
 </div></section></section><section><section>
@@ -14532,6 +14545,20 @@ Para la regresion lineal miramos el MSE:
 <li><p>Necesitamos algo que nos ayude a encontrar el balance optimo.</p>
 </li>
 </ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Problemas-de-la-regresion-lineal">Problemas de la regresion lineal<a class="anchor-link" href="#Problemas-de-la-regresion-lineal">&#182;</a></h1><hr>
+<p><img height="800px" class="center-block" src="https://raw.githubusercontent.com/carabedo/carabedo.github.io/main/imgs/over.png"></p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Problemas-de-la-regresion-lineal">Problemas de la regresion lineal<a class="anchor-link" href="#Problemas-de-la-regresion-lineal">&#182;</a></h1><hr>
+<p><img height="800px" class="center-block" src="https://raw.githubusercontent.com/carabedo/carabedo.github.io/main/imgs/betas.png"></p>
 
 </div>
 </div></section></section><section><section>
@@ -14593,51 +14620,31 @@ $$p=1$$<p>Estas técnicas proponen cambiar ligeramente el problema de optimizaci
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Regresion-Ridge-reduce-el-tama&#241;o-de-los-$\beta_n$-:">Regresion Ridge reduce el tama&#241;o de los $\beta_n$ :<a class="anchor-link" href="#Regresion-Ridge-reduce-el-tama&#241;o-de-los-$\beta_n$-:">&#182;</a></h3><p>Para un dataset crediticio de ejemplo donde se busca predecir en funcion de 4 variables (income, limit, rating y student) , se muestra como varian los coeficientes de la Regression Ridge en funcion del hiperparametro $\alpha$
-<br></p>
-<p><img src="https://raw.githubusercontent.com/carabedo/carabedo.github.io/main/imgs/4.png" align="center" width="50%"/></p>
-<ul>
-<li>Se puede ver que para $\alpha = 0$ los coeficientes son los mismos que para la regresion lineal comun.
-<br></li>
-</ul>
+<h3 id="Regresion-Ridge-mejora-la-varianza-con-respecto-a-la-Regresion-Lineal:">Regresion Ridge mejora la varianza con respecto a la Regresion Lineal:<a class="anchor-link" href="#Regresion-Ridge-mejora-la-varianza-con-respecto-a-la-Regresion-Lineal:">&#182;</a></h3><hr>
+<p>Recordemos que podemos reescribir el MSE ($MSE= Var + Bias^2$), analicemos el MSE (<strong>rojo</strong>) en funcion del hiperparametro $\alpha$ para un dataset de ejemplo.</p>
+<div class="row">
+<div class="col-md-6" markdown="1">
 
+<img height="800px" class="center-block" src="https://raw.githubusercontent.com/carabedo/carabedo.github.io/main/imgs/5.png">
+
+</div><div class="col-md-6" markdown="1">
+<ul>
+<br> 
+
+
+<li>En <b>verde</b> la varianza en las predicciones, vemos que disminuyen a medida que acentuamos la penalizacion en los coeficientes. Ganamos precision</li>
+<br>    
+
+<li>En <b>negro</b> el bias en las predicciones del modelo, a medida que acentuamos la penalizacion el bias aumenta. Perdemos exactitud.</li>
+<br>    
+
+<li>Con la penalizacion <b>Ridge</b> logramos mejorar la varianza a costa de un aumento del bias. Con linea punteada el MSE de la regresion lineal sin penalizacion.</li>
+<br>    
+
+
+</ul>
 </div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Regresion-Ridge-reduce-el-tama&#241;o-de-los-$\beta_n$-:">Regresion Ridge reduce el tama&#241;o de los $\beta_n$ :<a class="anchor-link" href="#Regresion-Ridge-reduce-el-tama&#241;o-de-los-$\beta_n$-:">&#182;</a></h3><p><img src="https://raw.githubusercontent.com/carabedo/carabedo.github.io/main/imgs/4.png" align="center" width="50%"/></p>
-<ul>
-<li>Para $\alpha &gt;&gt; 100$ los coeficientes tienden a 0.
-<br></li>
-<li>Se puede ver que variando el hiperparametro $\alpha$ que controla el termino de penalizacion se logra achicar el tamaño de los coeficientes $\beta_n$</li>
-</ul>
-
 </div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Regresion-Ridge-mejora-la-varianza-con-respecto-a-la-Regresion-Lineal:">Regresion Ridge mejora la varianza con respecto a la Regresion Lineal:<a class="anchor-link" href="#Regresion-Ridge-mejora-la-varianza-con-respecto-a-la-Regresion-Lineal:">&#182;</a></h3><p><img src="https://raw.githubusercontent.com/carabedo/carabedo.github.io/main/imgs/5.png" align="center" width="50%" /></p>
-<ul>
-<li><p>En este ejemplo para otro dataset se grafica el MSE en la predicion (<strong>rojo</strong>) en funcion del hiperparametro $\alpha$ (recordar $\alpha = 0$ Regresion Lineal)</p>
-</li>
-<li><p>Recordemos que podemos reescribir el MSE ($MSE= Var + Bias^2 $) para poder analizar su variacion con respecto a $\alpha$</p>
-</li>
-</ul>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Regresion-Ridge-mejora-la-varianza-con-respecto-a-la-Regresion-Lineal:">Regresion Ridge mejora la varianza con respecto a la Regresion Lineal:<a class="anchor-link" href="#Regresion-Ridge-mejora-la-varianza-con-respecto-a-la-Regresion-Lineal:">&#182;</a></h3><p><img src="https://raw.githubusercontent.com/carabedo/carabedo.github.io/main/imgs/5.png" align="center" width="50%" /></p>
-<ul>
-<li><p>En <strong>verde</strong> la varianza en las predicciones, que vemos que disminuyen a medida que acentuamos la penalizacion en los coeficientes. Ganamos precision</p>
-</li>
-<li><p>En <strong>negro</strong> el bias en las predicciones del modelo, para $\alpha = 0$ es 0 (sobreajuste), a medida que acentuamos la penalizacion el bias aumenta. Perdemos exactitud.</p>
-</li>
-<li><p>Con la penalizacion <strong>Ridge</strong> logramos mejorar la varianza a costa de un aumento del bias. Con linea punteada el MSE de la regresion lineal sin penalizacion.</p>
-</li>
-</ul>
-
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14662,19 +14669,36 @@ $$p=1$$<p>Estas técnicas proponen cambiar ligeramente el problema de optimizaci
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Ejemplo:">Ejemplo:<a class="anchor-link" href="#Ejemplo:">&#182;</a></h3><p><img src="https://raw.githubusercontent.com/carabedo/carabedo.github.io/main/imgs/6.png" align="center" width="50%" /></p>
+<h3 id="Ejemplo-Regresion-Lasso:">Ejemplo Regresion Lasso:<a class="anchor-link" href="#Ejemplo-Regresion-Lasso:">&#182;</a></h3><hr>
+<p>Para el mismo dataset crediticio, se muestra como varian los coeficientes $\beta_n$ de la Regression Lasso en funcion del hiperparametro $\alpha$</p>
+<p><br></p>
+<div class="row">
+<div class="col-md-6" markdown="1">
+
+<img height="800px" class="center-block" src="https://raw.githubusercontent.com/carabedo/carabedo.github.io/main/imgs/6.png">
+
+</div><div class="col-md-6" markdown="1">
+
 <ul>
-<li><p>Para un dataset crediticio de ejemplo donde se busca predecir en funcion de 4 variables (income, limit, rating y student) , se muestra como varian los coeficientes $\beta_n$ de la Regression Lasso en funcion del hiperparametro $\alpha$
-<br></p>
-</li>
-<li><p>Se puede ver que para $\alpha = 0$ los coeficientes son los mismos que para la regresion lineal comun.
-<br></p>
-</li>
-<li><p>Para $\alpha &gt; 500$ los coeficientes son extrictamente 0. Van anulandose uno por uno.
-<br></p>
-</li>
+<br> 
+
+
+<li>Se puede ver que para $\alpha = 0$ los coeficientes son los mismos que para la regresion lineal comun.</li>
+<br>    
+
+
+
+<li>Para $\alpha > 500$ los coeficientes son extrictamente 0. Van anulandose uno por uno.</li>
+<br>    
+
+
+<li>Que variables se anulan primero?</li>
+<br>    
+
 </ul>
 
+</div>
+</div>
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14688,6 +14712,25 @@ $$p=1$$<p>Estas técnicas proponen cambiar ligeramente el problema de optimizaci
 <li><p>Intuitivamente quedemonos con la idea de que solo la forma de la norma L1 permite que las soluciones a la optimizacion de la funcion de costo 'caigan' en los ejes, donde $\beta_n = 0$ (en el ejemplo $\beta_1 = 0$ y $\beta_2 \neq 0$)</p>
 </li>
 </ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Por-que-Lasso-puede-anular-los-$\beta_n$-?">Por que Lasso puede anular los $\beta_n$ ?<a class="anchor-link" href="#Por-que-Lasso-puede-anular-los-$\beta_n$-?">&#182;</a></h3><hr>
+<p><img src="https://people.eecs.berkeley.edu/~jrs/189/ridgelassoItayEvron.gif" alt=""></p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img height="800px" class="center-block" src="https://raw.githubusercontent.com/carabedo/carabedo.github.io/main/imgs/lsq.png"></p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img height="800px" class="center-block" src="https://raw.githubusercontent.com/carabedo/carabedo.github.io/main/imgs/laso.png"></p>
 
 </div>
 </div></section></section><section><section>
@@ -14732,21 +14775,46 @@ $$p=1$$<p>Estas técnicas proponen cambiar ligeramente el problema de optimizaci
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="En-resumen:">En resumen:<a class="anchor-link" href="#En-resumen:">&#182;</a></h2><p>Que es regularizacion?:</p>
+<h2 id="Tuneando-el-hiperparametro-$\alpha$">Tuneando el hiperparametro $\alpha$<a class="anchor-link" href="#Tuneando-el-hiperparametro-$\alpha$">&#182;</a></h2><hr>
+<p>¿Cómo funciona?</p>
+<ol>
+<li><p>Hacemos el split train/validación y test</p>
+</li>
+<li><p>Dividimos el dataset de train/validación en k grupos (generalmente, 5 o 10 suele ser la medida convencional) del mismo tamaño.</p>
+</li>
+<li><p>En la iteración i-ésima, el i-esimo grupo generado funciona como un conjunto de validación; el resto de los grupos es el conjunto de training</p>
+</li>
+<li><p>Entrenamos un modelo sobre el conjunto de training definido en 3.</p>
+</li>
+<li><p>Hacemos las predicciones sobre el conjunto de validación definido en 3. y calculamos el error sobre este conjunto</p>
+</li>
+<li><p>Repetimos los pasos 3. a 5. k veces, variando así los conjuntos de entrenamiento y de validación en cada iteración.</p>
+</li>
+<li><p>Promediamos los k errores obtenidos (un valor de error en cada una de las iteraciones).</p>
+</li>
+</ol>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Tuneando-el-hiperparametro-$\alpha$">Tuneando el hiperparametro $\alpha$<a class="anchor-link" href="#Tuneando-el-hiperparametro-$\alpha$">&#182;</a></h2><hr>
+<p><img src="https://raw.githubusercontent.com/Digital-House-DATA/ds_blend_2021_img/master/M3/CLASE_23_Regularizacion/Presentacion/img/M3_CLASE_23_cross_validation.png" align="center" /></p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Conclusiones:">Conclusiones:<a class="anchor-link" href="#Conclusiones:">&#182;</a></h2><hr>
 <ul>
-<li>Es una tecnica que nos ayuda a evitar el overfitting. Es un termino extra en la funcion de costo de la regresion lineal que controla los $\beta_n$.</li>
+<li><strong>Que es regularizacion?</strong>: Es una tecnica que nos ayuda a evitar el overfitting. Es un termino extra en la funcion de costo de la regresion lineal que controla los $\beta_n$.</li>
 </ul>
-<p>Cuando la uso?:</p>
 <ul>
-<li><p>Cuando sopechemos que nuestro modelo esta overfitteando (cuando el error del test sea mucho mayor que el training set).</p>
-</li>
-<li><p>Cuando tengo pocos datos en comparacion con la cantidad de variables, tambien podria producir un overfitting.</p>
-</li>
-<li><p>Cuando necesito elegir variables para simplificar el modelo y ganar interpretabilidad.</p>
-</li>
+<li><strong>Cuando la uso?</strong>: Cuando sopechemos que nuestro modelo esta overfitteando (cuando el error del test sea mucho mayor que el training set).  Cuando tengo pocos datos en comparacion con la cantidad de variables, tambien podria producir un overfitting. Cuando necesito elegir variables para simplificar el modelo y ganar interpretabilidad.</li>
 </ul>
-<p>Que opciones tenemos?</p>
 <ul>
+<li><p><strong>Que opciones tenemos?</strong>:</p>
+</li>
 <li><p>Ridge usa norma L2 reduce el tamaño de los $\beta_n$, pero no anula ninguno.</p>
 </li>
 <li><p>Lasso usa norma L1 reduce el tamaño de los $\beta_n$ hasta el punto de anular algunas variables.</p>
@@ -14804,12 +14872,6 @@ $$p=1$$<p>Estas técnicas proponen cambiar ligeramente el problema de optimizaci
 </div>
 </div>
 
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Tuneando-el-hiperparametro-$\alpha$">Tuneando el hiperparametro $\alpha$<a class="anchor-link" href="#Tuneando-el-hiperparametro-$\alpha$">&#182;</a></h2><hr>
-
-</div>
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
@@ -14824,6 +14886,8 @@ $$p=1$$<p>Estas técnicas proponen cambiar ligeramente el problema de optimizaci
 <span class="n">ridge_cv</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">RidgeCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="n">alphalist</span><span class="p">,</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> 
 
 <span class="n">lasso_cv</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LassoCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="n">alphalist</span><span class="p">,</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> 
+
+<span class="n">enet_cv</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">ElasticNetCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="n">alphalist</span><span class="p">,</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15324,6 +15388,8 @@ r^2 test : 0.6806564931029594
 <p><a href="https://www.statlearning.com/" target="_blank">An Introduction to Statistical Learning</a> Seccion 6.2 Los ejemplos de Ridge y Lasso</p>
 <p><a href="https://towardsdatascience.com/mse-and-bias-variance-decomposition-77449dd2ff55" target="_blank"> Descomposicion Bias, Variance del MSE</a></p>
 <p><a href="https://towardsdatascience.com/from-linear-regression-to-ridge-regression-the-lasso-and-the-elastic-net-4eaecaf5f7e6" target="_blank"> Ridge, Lasso y Elastic Net</a></p>
+<p><a href="https://www.youtube.com/watch?v=GaXfqoLR_yI" target="_blank"> Robust, Interpretable Statistical Models: Sparse Regression with the LASSO
+ </a></p>
 
 </div>
 </div></section></section>
